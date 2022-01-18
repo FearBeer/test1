@@ -22,3 +22,22 @@ function addNumberColor($num1, $num2, $color = '#ee33ff') {
 }
 
 addNumberColor(1,2);
+
+function addNumberColor2($num1, $num2, $color = '#ee33ff') {
+  $sum = $num1 + $num2;
+  $result = [$sum, $color];
+  return $result;
+}
+
+$params = addNumberColor2(10,2);
+echo "Sum is: <span style='color: $params[1]';>\" $params[0] \"</span><br>";
+// echo "Sum is: <span style='color: $color;'>" . ($num1 + $num2) . "</span><br>";
+
+
+function render(): void {
+  $params = addNumberColor2(10,2);
+  echo "Sum is: <span style='color: $params[1]';>\" $params[0] \"</span><br>";
+  echo 'Render is Ok!';
+} 
+
+render();
