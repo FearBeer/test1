@@ -1,6 +1,6 @@
 <?php 
 
-// дз 1: массивы с фигруками
+// дз 3: массивы с фигруками
 
 function getFigures():array {
     $figures = [
