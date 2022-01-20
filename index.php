@@ -54,3 +54,7 @@ echo '<br>';
 foreach ($fruits as $k => $v) {
     echo "Key: \"$K\" Value:\"$v\"";
 };
+
+echo '<br>';
+
+echo date('d:m:y');
