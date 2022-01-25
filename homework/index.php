@@ -1,6 +1,5 @@
 <?php
 
-
 $cpu = [
     [
         'name' => 'AMD',
@@ -38,36 +37,56 @@ $memory = [
 ];
 
 function getComp($cpu, $mainboard, $memory) {
-    $result = [];
+    $result = [
+        'cpu' => '',
+        'mainboard' => ''
+    ];
+   
+    // Хрень какая-то... если добавить ещё Блок питания и HD... а ещё нам рандом нужен.... в общем куча вопросов(
+   
     foreach($cpu as $cpSocket) {
         foreach($mainboard as $mbSoccket) {
-            if ($cpSocket["socket"] === $mbSoccket["socket"]) {
-                $result_push($cpSocket["name"], $mbSoccket["name"]);
-                echo $cpSocket["socket"];
+            foreach ($memory as $memoryPC) {
+                if ($cpSocket["socket"] === $mbSoccket["socket"] && $memoryPC["type"] === $mbSoccket["ramType"]) {
+                    $result = [
+                        'cpu' => $cpSocket["name"] . ' ' . $cpSocket["frequency"] . ' ',
+                        'mainboard' => $mbSoccket["name"],
+                        'memory' => $memoryPC["memory"]
+    
+                    ];
+                }
+                
             };
         };
     };
     return $result; 
 };
 
-$result = getComp($cpu, $mainboard, $memory);
 
-print_r($result);
 
 function printDetails($details) {
     foreach($details as $detail) {
         echo '<div style="width: 300px; height: 300px; background-color: lightblue; margin: 0 10px 10px 0">';        
-            echo "<h2>" .$detail["name"]. "</h2>";            
-            echo "<h4>" .$detail["socket"]. "</h4>";
-            echo "<h4>" .$detail["frequency"]. "</h4>";
-            echo "<h4>" .$detail["cores"]. "</h4>";
-            echo "<h4>" .$detail["ramType"]. "</h4>";
-            echo "<h4>" .$detail["type"]. "</h4>";
-            echo "<h4>" .$detail["memory"]. "</h4>"; 
+        echo "<h2>" .$detail["name"] . "</h2>";            
+        echo "<h4>" .$detail["socket"]. "</h4>";
+        echo "<h4>" .$detail["frequency"]. "</h4>";
+        echo "<h4>" .$detail["cores"]. "</h4>";
+        echo "<h4>" .$detail["ramType"]. "</h4>";
+        echo "<h4>" .$detail["type"]. "</h4>";
+        echo "<h4>" .$detail["memory"]. "</h4>"; 
         echo '</div>';        
     };
 };
 
+function printResult($array) {
+    echo '<div style="width: 300px; height: 300px; background-color: lightblue; margin: 0 10px 10px 0">';
+    echo "<h2>" .$array["cpu"]. "</h2>";
+    echo "<h2>" .$array["mainboard"]. "</h2>";
+    echo "<h2>" .$array["memory"]. "</h2>";  
+    echo '</div>';        
+}
+
+$result = getComp($cpu, $mainboard, $memory);
 echo '<div style="display: flex; flex-wrap: wrap">';
 printDetails($cpu);
 
@@ -75,7 +94,7 @@ printDetails($mainboard);
 
 printDetails($memory);
 
-printDetails($result);
+printResult($result);
 
 echo '</div>';
 
