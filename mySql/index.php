@@ -15,7 +15,7 @@ foreach ($products as $product) {
 
 // далее для каждого запроса своё имя и выводим
 
-echo '<h2>Первое</h2>';
+echo '<h2>Без категории</h2>';
 
 $productsWithoutCategory = $shop->query('SELECT `product`.`name`, `product`.`price`, `category`.`name` AS `category` FROM `product`
 LEFT JOIN `category`
@@ -25,11 +25,11 @@ WHERE `product`.`id_category` IS NULL'
 
 foreach ($productsWithoutCategory as $product) {
     echo '<div style="margin-bottom: 5px; background-color: lightgray; width: 300px; height: 50px; display: flex;
-    justify-content: center; align-items: center">' . $product['name'] . '.' . ' ' . $product['price'] . $product['category'] . '</div>';
+    justify-content: center; align-items: center">' . $product['name'] . ':' . '  ' . $product['price'] . '</div>';
 };
 
 
-echo '<h2>2</h2>';
+echo '<h2>С категориями</h2>';
 
 $productsWithCategory = $shop->query('SELECT `product`.`name`, `product`.`price`, `category`.`name` AS `category` FROM `product`
 LEFT JOIN `category`
